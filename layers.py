@@ -16,8 +16,6 @@ def conv(batch_input, kernel_size, out_channels, stride):
     with tf.variable_scope("conv"):
         in_channels = batch_input.get_shape()[3]
         filter = tf.get_variable("filter", [kernel_size, kernel_size, in_channels, out_channels], dtype=tf.float32, initializer=tf.random_normal_initializer(0, 0.02))
-        #padded_input = tf.pad(batch_input,[[0,0],[1,1],[1,1],[0,0]], mode="CONSTANT")
-        #conv = tf.nn.conv2d(padded_input, filter, [1, stride, stride, 1], padding="VALID")
         conv = tf.nn.conv2d(batch_input, filter, [1,stride, stride, 1], padding='SAME')
         return conv
 
